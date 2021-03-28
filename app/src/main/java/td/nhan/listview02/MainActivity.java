@@ -3,7 +3,9 @@ package td.nhan.listview02;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +25,18 @@ public class MainActivity extends AppCompatActivity {
 
         listViewAdapter = new ListViewAdapter(MainActivity.this, getAll());
         listView.setAdapter(listViewAdapter);
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Toast.makeText(MainActivity.this, listViewAdapter.getItem(position).toString(), Toast.LENGTH_LONG).show();
+        });
+
     }
 
     private List<Technology> getAll() {
         List<Technology> t = new ArrayList<>();
-        t.add(new Technology(R.drawable.facebook_logo_png_9024, "Spring", "Sub Spring", "D17"));
-        t.add(new Technology(R.drawable.facebook_logo_png_9024, "Spring", "Sub Spring", "D17"));
-        t.add(new Technology(R.drawable.facebook_logo_png_9024, "Spring", "Sub Spring", "D17"));
-        t.add(new Technology(R.drawable.facebook_logo_png_9024, "Spring", "Sub Spring", "D17"));
+        t.add(new Technology(R.drawable.facebook_logo_png_9024, "Facebook", "Sub Spring", "D17"));
+        t.add(new Technology(R.drawable.facebook_logo_png_9024, "Instagram", "Sub Spring", "D17"));
+        t.add(new Technology(R.drawable.facebook_logo_png_9024, "Twitter", "Sub Spring", "D17"));
+        t.add(new Technology(R.drawable.facebook_logo_png_9024, "Telegram", "Sub Spring", "D17"));
 
         return t;
     }

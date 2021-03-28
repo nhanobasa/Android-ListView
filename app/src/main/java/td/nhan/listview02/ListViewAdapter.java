@@ -13,40 +13,47 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 import td.nhan.listview02.model.Technology;
 
 public class ListViewAdapter extends ArrayAdapter<Technology> {
 
     private List<Technology> technologyList;
-    private Context context;
 
     public ListViewAdapter(@NonNull Context context, List<Technology> resource) {
         super(context, R.layout.listview, resource);
-        this.context = context;
+        technologyList = resource;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
-
-        View v = layoutInflater.inflate(R.layout.listview, parent, false);
-
-        ImageView img = v.findViewById(R.id.img);
-        TextView txt1 = v.findViewById(R.id.title);
-        TextView txt2 = v.findViewById(R.id.sub);
-        TextView txt3 = v.findViewById(R.id.content);
-
+        // Get the data item for this position
         Technology technology = technologyList.get(position);
 
-        img.setImageResource(technology.getResImg());
-        txt1.setText(technology.getTitle());
-        txt2.setText(technology.getSub());
-        txt3.setText(technology.getContent());
+        // Check if an existing view is being reused, otherwise inflate the view
+        if (convertView == null)
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.listview, parent, false);
 
-        return v;
+        // Lookup view for data population
+        ImageView imageView = convertView.findViewById(R.id.img);
+        TextView textView1 = convertView.findViewById(R.id.title);
+        TextView textView2 = convertView.findViewById(R.id.sub);
+        TextView textView3 = convertView.findViewById(R.id.content);
+
+        // Populate the data into the template view using the data object
+        imageView.setImageResource(technology.getResImg());
+        textView1.setText(technology.getTitle());
+        textView2.setText(technology.getSub());
+        textView3.setText(technology.getContent());
+
+        // Return the completed view to render on screen
+        return convertView;
+
+    }
+
+    public Technology getItem(int position) {
+        return technologyList.get(position);
     }
 }

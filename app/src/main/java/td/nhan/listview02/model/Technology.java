@@ -42,4 +42,14 @@ public class Technology {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "Technology{" +
+                "resImg=" + resImg +
+                ", title='" + title + '\'' +
+                ", sub='" + sub + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }
